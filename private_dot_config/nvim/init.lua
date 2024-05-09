@@ -9,7 +9,7 @@
 
 -- Vim settings --
 
-require("vim-opt")
+require("vim_opt")
 
 -- Space is <leader>
 vim.api.nvim_set_keymap("", "<Space>", "<Nop>", { noremap = true, silent = true })
@@ -35,8 +35,8 @@ require("lazy").setup("plugins")
 
 -- Theme --
 
-require("catppuccin").setup()
-vim.cmd.colorscheme("catppuccin")
+require("rose-pine").setup()
+vim.cmd.colorscheme("rose-pine")
 
 -- Keymaps --
 require("keymaps")

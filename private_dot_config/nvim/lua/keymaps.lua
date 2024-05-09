@@ -35,7 +35,12 @@ keymap("n", "<S-h>", ":bprevious<CR>", opts)
 
 -- Insert --
 -- Press jk fast to enter
-keymap("i", "fj", "<ESC>", opts)
+-- keymap("i", "fj", "<ESC>", opts)
+
+keymap("i", "<C-h>", "h", opts)
+keymap("i", "<C-j>", "j", opts)
+keymap("i", "<C-k>", "k", opts)
+keymap("i", "<C-l>", "l", opts)
 
 -- Visual --
 
@@ -51,7 +56,6 @@ keymap("v", "<A-k>", "ddkp", opts)
 -- Move text up and down
 keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
-
 
 -- Plugins --
 
@@ -69,12 +73,14 @@ vim.keymap.set("n", "<leader>e", ":Neotree filesystem reveal left toggle=true<CR
 -- Lsp
 vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
 vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
+vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, {})
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation, {})
+vim.keymap.set('n', 'gr', vim.lsp.buf.references, {})
 vim.keymap.set("n", "gl", vim.lsp.buf.signature_help, {})
+vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename, {})
 vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
 vim.keymap.set({ "n", "v" }, "<leader>gf", vim.lsp.buf.format, {})
 
 -- Dap
 vim.keymap.set("n", "<leader>dd", dap.toggle_breakpoint, {})
 vim.keymap.set("n", "<leader>dc", dap.continue, {})
-

@@ -6,7 +6,7 @@
 interval=0
 
 # load colors
-. ~/.config/wm/scripts/bar_themes/catppuccin
+. ~/.config/wm/scripts/bar_themes/rosepine-moon
 
 cpu() {
   cpu_val=$(grep -o "^[^ ]*" /proc/loadavg)

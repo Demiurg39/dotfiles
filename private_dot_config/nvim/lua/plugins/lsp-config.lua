@@ -1,4 +1,4 @@
-local servers = { "lua_ls", "pyright", "clangd", "jdtls", "ruff_lsp" } -- "ruff_lsp",
+local servers = { "lua_ls", "pyright", "clangd", "jdtls", "ruff_lsp" }
 local sources = {
 	--[[ formatters ]]
 	"stylua",
@@ -7,7 +7,6 @@ local sources = {
 	"shfmt",
 	--[[ linters ]]
 	"codespell",
-	"ruff",
 }
 
 return {
@@ -94,9 +93,7 @@ return {
 			lspconfig.clangd.setup({
 				capabilities = capabilities,
 			})
-			lspconfig.jdtls.setup({
-				capabilities = capabilities,
-			})
 		end,
 	},
+	{ "mfussenegger/nvim-jdtls", dependencies = { "mfussenegger/nvim-dap" } },
 }

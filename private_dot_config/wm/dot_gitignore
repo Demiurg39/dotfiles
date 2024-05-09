@@ -1,0 +1,6 @@
+wm/dwm 
+wm/config.h 
+wm/*.o
+wm/*.orig
+wm/*.rej
+.ccls-cache/
