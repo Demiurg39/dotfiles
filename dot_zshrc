@@ -1,0 +1,147 @@
+# Env variables
+source ~/.zshenv
+
+# Set directory for zinit and plugins
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+
+# Install zinit if its not
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+
+# Source zinit
+source "${ZINIT_HOME}/zinit.zsh"
+
+# Load starship prompt
+zinit ice as"command" from"gh-r" \
+          atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
+          atpull"%atclone" src"init.zsh"
+zinit light starship/starship
+
+# Zsh completions
+zinit ice blockf atpull'zinit creinstall -q .'
+zinit light zsh-users/zsh-completions
+
+# Zinit snippets
+zinit snippet OMZP::git
+zinit snippet OMZP::dotenv
+zinit snippet OMZP::sudo
+zinit snippet OMZP::archlinux
+zinit snippet OMZP::command-not-found
+
+# Load completions
+autoload -U compinit && compinit
+zinit cdreplay -q
+
+# Load zsh plugins
+zinit light-mode for \
+  hlissner/zsh-autopair \
+  zdharma-continuum/fast-syntax-highlighting \
+  MichaelAquilina/zsh-you-should-use \
+  zsh-users/zsh-autosuggestions \
+  Aloxaf/fzf-tab
+
+zinit ice wait'3' lucid
+zinit light zsh-users/zsh-history-substring-search
+
+zinit ice wait'2' lucid
+zinit light zdharma-continuum/history-search-multi-word
+
+# FZF
+zinit ice from"gh-r" as"command"
+zinit light junegunn/fzf-bin
+
+# Zoxide
+zinit ice from"gh-r" as"command"
+zinit light ajeetdsouza/zoxide
+
+# EZA
+zinit ice wait lucid from"gh-r" as"program" mv"eza* -> eza"
+zinit light eza-community/eza
+
+# BAT
+zinit ice wait lucid from"gh-r" as"program" mv"*/bat -> bat" atload"export BAT_THEME='Nord'"
+zinit light sharkdp/bat
+
+# Options
+
+# Bindkeys
+bindkey -v
+
+# History
+HISTFILE="$HOME/.cache/zsh/zhistory"
+HISTSIZE=10000
+SAVEHIST=HISTSIZE
+
+while read -r opt
+do 
+  setopt $opt
+done <<-EOF
+AUTOCD
+AUTO_MENU
+AUTO_PARAM_SLASH
+COMPLETE_IN_WORD
+NO_MENU_COMPLETE
+HASH_LIST_ALL
+ALWAYS_TO_END
+NOTIFY
+NOHUP
+MAILWARN
+INTERACTIVE_COMMENTS
+NOBEEP
+INC_APPEND_HISTORY
+SHARE_HISTORY
+INC_APPEND_HISTORY
+EXTENDED_HISTORY
+HIST_IGNORE_ALL_DUPS
+HIST_IGNORE_SPACE
+HIST_NO_FUNCTIONS
+HIST_EXPIRE_DUPS_FIRST
+HIST_SAVE_NO_DUPS
+HIST_REDUCE_BLANKS
+EOF
+
+# make completions case insensetive
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+
+# set descriptions format to enable group support
+zstyle ':completion:*:descriptions' format '[%d]'
+
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+#
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' menu no
+
+# preview directory's content with exa when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+
+# switch group using `,` and `.`
+zstyle ':fzf-tab:*' switch-group ',' '.'
+
+# Shell integration
+eval "$(zoxide init --cmd cd zsh)"
+
+# Aliases
+alias doas="sudo"
+alias c="clear"
+alias mkgrub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+alias ..="cd .."
+alias ls="eza --color=always"
+alias cat="bat --color always --plain"
+alias mkdir="mkdir -p"
+alias grep='grep --color=auto'
+alias mv='mv -v'
+alias cp='cp -vr'
+alias rm='rm -vr'
+alias fm='ranger'
+alias uz='unzip'
+alias pacin="pacman -Slq | fzf -m --preview 'cat <(pacman -Si {1}) <(pacman -Fl {1} | awk \"{print \$2}\")' | xargs -ro sudo pacman -S"
+alias yayin="yay -Slq | fzf -m --preview 'cat <(paru -Si {1}) <(paru -Fl {1} | awk \"{print \$2}\")' | xargs -ro  yay -S"
+alias pacrem="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
+alias pac="pacman -Q | fzf"
+
+# At shell start command
+fastfetch
