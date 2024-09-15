@@ -66,6 +66,8 @@ zinit light sharkdp/bat
 
 # Bindkeys
 bindkey -v
+bindkey "^P" history-beginning-search-backward
+bindkey "^N" history-beginning-search-forward
 
 # History
 HISTFILE="$HOME/.cache/zsh/zhistory"
