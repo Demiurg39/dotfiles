@@ -138,7 +138,7 @@ alias grep='grep --color=auto'
 alias mv='mv -v'
 alias cp='cp -vr'
 alias rm='rm -vr'
-alias fm='ranger'
+alias fm='yazi'
 alias uz='unzip'
 alias pacin="pacman -Slq | fzf -m --preview 'cat <(pacman -Si {1}) <(pacman -Fl {1} | awk \"{print \$2}\")' | xargs -ro sudo pacman -S"
 alias yayin="yay -Slq | fzf -m --preview 'cat <(paru -Si {1}) <(paru -Fl {1} | awk \"{print \$2}\")' | xargs -ro  yay -S"
