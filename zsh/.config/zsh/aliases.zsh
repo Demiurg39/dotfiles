@@ -1,17 +1,28 @@
 # Aliases
 alias cl="clear"
 alias mkgrub='doas grub-mkconfig -o /boot/grub/grub.cfg'
+
+# Set directory aliases.
+# alias -- -='cd -'
+alias dirh='dirs -v'
 alias ..="cd .."
+
+for _index in {0..9}; do
+    alias "$_index"="cd -${_index}" # dirstack aliases (eg: "2"="cd -2")
+    alias "..${_index}"="cd ../.."  # backref aliases (eg: "..3"="cd ../../..")
+done
+
 alias sudo="doas"
-alias ls="eza --color=always"
-alias cat="bat --color always --plain"
+alias ls="eza --color=auto"
+alias cat="bat --color always --plain --paging never"
 alias mkdir="mkdir -p"
-alias grep='grep --color=auto'
-alias mv='mv -v'
-alias cp='cp -vr'
-alias rm='rm -vr'
-alias fm='yazi'
-alias uz='unzip'
+alias grep="grep --color=auto"
+alias mv="mv -v"
+alias cp="cp -vr"
+alias rm="rm -vr"
+alias fm="yazi"
+alias uz="unzip"
+alias diff="diff --color"
 alias stl="steamtinkerlaunch"
 alias open='xdg-open'
 alias -g -- -h='-h 2>&1 | bat --language=help --style=plain'
