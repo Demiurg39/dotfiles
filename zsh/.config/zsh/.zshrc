@@ -28,6 +28,30 @@ bindkey -v
 bindkey "^E" history-beginning-search-backward
 bindkey "^N" history-beginning-search-forward
 
+# History
+while read -r opt
+do
+    setopt $opt
+done <<- EOF
+BANG_HIST
+EXTENDED_HISTORY
+HIST_EXPIRE_DUPS_FIRST
+HIST_FIND_NO_DUPS
+HIST_IGNORE_ALL_DUPS
+HIST_IGNORE_DUPS
+HIST_IGNORE_SPACE
+HIST_REDUCE_BLANKS
+HIST_SAVE_NO_DUPS
+HIST_VERIFY
+INC_APPEND_HISTORY
+NO_HIST_BEEP
+NO_SHARE_HISTORY
+EOF
+
+HISTFILE="${ZDOTDIR:-$HOME}/.zsh_history"
+SAVEHIST=100000
+HISTSIZE=20000
+
 # Shell integration
 eval "$(zoxide init --cmd cd zsh)"
 

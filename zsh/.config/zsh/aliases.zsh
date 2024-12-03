@@ -30,7 +30,7 @@ alias -g -- --help='--help 2>&1 | bat --language=help --style=plain'
 
 # Gentoo specific aliasses
 alias emin="doas emerge"
-alias eminrb="doas emerge -G"
+alias eminb="doas emerge -G"
 alias emrem="doas emerge -C"
 alias emsearch="emerge -s"
 alias eisync="doas eix-sync"

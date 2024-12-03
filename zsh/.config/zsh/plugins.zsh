@@ -4,10 +4,10 @@ zinit ice lucid atload'source ${ZDOTDIR}/.p10k.zsh; _p9k_precmd' nocd
 zinit light romkatv/powerlevel10k
 
 # Zephyr
-plugins=(color completion compstyle directory history)
+plugins=(color completion compstyle directory)
 
 for plugin in "${plugins[@]}"; do
-    zinit ice wait lucid multisrc"plugins/$plugin/*.plugin.zsh" pick"/dev/null"
+    zinit ice wait lucid multisrc"plugins/$plugin/$plugin.plugin.zsh" pick"/dev/null"
     zinit light mattmc3/zephyr
 done
 
