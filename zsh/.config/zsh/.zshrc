@@ -14,7 +14,7 @@ ZINIT_HOME="${XDG_DATA_HOME:-$HOME}/.local/share/zinit/zinit.git"
 for file in \
     "${ZINIT_HOME}/zinit.zsh" \
     "$ZDOTDIR/plugins.zsh" \
-    "$ZDOTDIR/aliases.zsh"
+    "$ZDOTDIR/aliases.zsh" 
 do 
     source "$file"
 done
@@ -62,4 +62,3 @@ fastfetch -l $(find "$HOME/.config/fastfetch/ascii/" -name "*.txt" | sort -R | h
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 (( ! ${+functions[p10k]} )) || p10k finalize
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
-
